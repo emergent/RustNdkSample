@@ -35,3 +35,13 @@ dependencies {
     androidTestImplementation 'androidx.test.espresso:espresso-core:3.2.0'
 
 }
+
+apply plugin: 'org.mozilla.rust-android-gradle.rust-android'
+
+cargo {
+    module  = "../rustndk"         // Or whatever directory contains your Cargo.toml
+    libname = "rustndk"            // Or whatever matches Cargo.toml's [package] name.
+    targets = ["arm64", "x86_64"]  // See bellow for a longer list of options
+}
+
+preBuild.dependsOn('cargoBuild')
